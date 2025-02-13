@@ -1,6 +1,6 @@
 --[[ nvim-neo-tree/neo-tree ]]
 -- Открыть интерфейс с древовидным отображением файлов
-vim.keymap.set({ 'n', 'i', 'v', 't' }, '<f1>', '<cmd>NeoTreeRevealToggle<cr>', { noremap = true })
+vim.keymap.set({ 'n', 'i', 'v', 't' }, '<f1>', '<cmd>Neotree toggle<cr>', { noremap = true })
 
 
 -- [[ folke/trouble.nvim ]]
