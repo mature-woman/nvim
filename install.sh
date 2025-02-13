@@ -14,7 +14,7 @@ set -l output (if set -q _flag_verbose; echo '/dev/tty'; else; echo '/dev/null';
 if set -q _flag_update
 	begin
 		# need to rewrite in future (бляяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя)
-		sudo apt install -y npm python3.10-venv ruby-dev pkg-config
+		sudo apt install -y npm python3-venv python3-pip ruby-dev pkg-config
 		python3 -m pip install --upgrade pip
 		fish_add_path ~/.local/bin
 		pip3 install --upgrade pynvim
