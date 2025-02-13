@@ -14,14 +14,14 @@ set -l output (if set -q _flag_verbose; echo '/dev/tty'; else; echo '/dev/null';
 if set -q _flag_update
 	begin
 		# need to rewrite in future (бляяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя)
-		sudo apt install -y npm python3-venv python3-pip ruby-dev pkg-config
+		sudo apt install -y npm python3-venv python3-pip rubygems ruby-dev pkg-config
 		python3 -m pip install --upgrade pip
 		fish_add_path ~/.local/bin
 		pip3 install --upgrade pynvim
 		sudo gem install neovim
 
 		# Install NeoVim module for NPM
-		sudo npm i -g neovim
+		npm i -g neovim
 	end &> $output
 end
 
@@ -192,7 +192,7 @@ if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
 
 	begin
 		# Установка
-		sudo npm i -g intelephense
+		npm i -g intelephense
 	end &> $output
 
 	print LSP_INTELEPHENSE_INSTALLED
@@ -209,7 +209,7 @@ if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
 
 	begin
 		# Установка
-		sudo npm i -g vscode-langservers-extracted
+		npm i -g vscode-langservers-extracted
 	end &> $output
 
 	print LSP_VSCODE-LANGSERVERS_INSTALLED
@@ -226,7 +226,7 @@ if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
 
 	begin
 		# Установка
-		sudo npm i -g emmet-ls
+		npm i -g emmet-ls
 	end &> $output
 
 	print LSP_EMMET_INSTALLED
@@ -243,7 +243,7 @@ if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
 
 	begin
 		# Установка
-		sudo npm i -g cssmodules-language-server
+		npm i -g cssmodules-language-server
 	end &> $output
 
 	print LSP_CSSMODULES_INSTALLED
@@ -305,7 +305,7 @@ if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
 
 	begin
 		# Установка
-		sudo npm i -g nginxbeautifier
+		npm i -g nginxbeautifier
 	end &> $output
 
 	print FORMATTER_NGINX_INSTALLED
@@ -322,7 +322,7 @@ if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
 
 	begin
 		npm i prettier
-		sudo npm i -g prettier
+		npm i -g prettier
 	end &> $output
 
 	print FORMATTER_PRETTIER_INSTALLED
