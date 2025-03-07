@@ -11,13 +11,15 @@ argparse $options -- $argv
 # Initializing the buffer of output
 set -l output (if set -q _flag_verbose; echo '/dev/tty'; else; echo '/dev/null'; end)
 
+python3 -m venv ~/.local --system-site-packages
+
 if set -q _flag_update
 	begin
 		# need to rewrite in future (бляяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя)
 		sudo apt install -y npm python3-venv python3-pip rubygems ruby-dev pkg-config
-		python3 -m pip install --upgrade pip
+		python3 -m ~/.local/bin/pip install --upgrade pip
 		fish_add_path ~/.local/bin
-		pip3 install --upgrade pynvim
+		~/.local/bin/pip install --upgrade pynvim
 		sudo gem install neovim
 
 		# Install NeoVim module for NPM
