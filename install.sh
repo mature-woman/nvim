@@ -4,6 +4,11 @@
 set -l options (fish_opt -s v -l verbose)
 set options $options (fish_opt -s f -l force)
 set options $options (fish_opt -s u -l update)
+set options $options (fish_opt -s h -l help)
+
+# Initializing settings
+set NODEJS_VERSION 23
+set NVIM_WIKI_INSTALLATION "https://github.com/neovim/neovim/wiki/Installing-Neovim/921fe8c40c34dd1f3fb35d5b48c484db1b8ae94b"
 
 # Reading the flags
 argparse $options -- $argv
@@ -11,27 +16,15 @@ argparse $options -- $argv
 # Initializing the buffer of output
 set -l output (if set -q _flag_verbose; echo '/dev/tty'; else; echo '/dev/null'; end)
 
-python3 -m venv ~/.local --system-site-packages
-
-if set -q _flag_update
-	begin
-		# need to rewrite in future (бляяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя)
-		sudo apt install -y npm python3-venv python3-pip rubygems ruby-dev pkg-config
-		python3 -m ~/.local/bin/pip install --upgrade pip
-		fish_add_path ~/.local/bin
-		~/.local/bin/pip install --upgrade pynvim
-		sudo gem install neovim
-
-		# Install NeoVim module for NPM
-		npm i -g neovim
-	end &> $output
-end
-
 # Инициализация текста сообщений в зависимости от установленного языка в оболочке
 if test (string match -ri "ru" "$LANG")
-  function print -a TYPE PARAM1 PARAM2 -d "Текст сообщений"
-    switch $TYPE
-      case PACKER_INSTALL
+	function print -a TYPE PARAM1 PARAM2 -d "Текст сообщений"
+		switch $TYPE
+			case HELP
+				set_color -b red yellow; echo -n "[mirzaev/nvim] "; set_color brcyan; echo -n "[ИНФОРМАЦИЯ] "; set_color -o white; echo "Формат: install.sh [флаги]"; echo; set_color normal; set_color yellow; echo -n "    -u  "; set_color cyan; echo -n "--update "; set_color -d white; echo "Обновить все зависимости"; set_color normal; set_color yellow; echo -n "    -f  "; set_color cyan; echo -n "--force "; set_color -d white; echo "Не просить подтверждения"; set_color normal; set_color yellow; echo -n "    -v  "; set_color cyan; echo -n "--verbose "; set_color -d white; echo "Подключить TTY к буферу вывода"; set_color normal; set_color yellow; echo -n "    -h  "; set_color cyan; echo -n "--help "; set_color -d white; echo "Прислать это сообщение"; echo; set_color normal; set_color white; echo -n "Этот установщик работает только для "; set_color yellow; echo -n "fish "; set_color white; echo -n "и "; set_color red; echo -n "ubuntu";	
+			case NVIM_NOT_INSTALLED
+        set_color yellow; echo -n "[mirzaev/nvim] "; set_color red; echo -n "[ОШИБКА] "; set_color white; echo "NeoVim не установлен";			
+			case PACKER_INSTALL
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[ЗАДАЧА] "; set_color white; echo "Установить Packer? (\"wbthomason/packer.nvim\") (y/N) ";
 			case PACKER_EXISTS
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[ЗАДАЧА] "; set_color white; echo "Packer уже установлен. Переустановить? (y/N) ";
@@ -85,7 +78,11 @@ if test (string match -ri "ru" "$LANG")
   end
 else
   function print -a TYPE PARAM1 PARAM2 -d "Messages text"
-    switch $TYPE
+    switch $TYPE	
+			case HELP
+				set_color yellow; echo -n "[mirzaev/nvim] "; set_color brcyan; echo -n "[INFORMATION] "; set_color -o white; echo "Format: install.sh [flags]"; echo; set_color normal; set_color yellow; echo -n "    -u  "; set_color cyan; echo -n "--update "; set_color -d white; echo "Update all dependencies"; set_color normal; set_color yellow; echo -n "    -f  "; set_color cyan; echo -n "--force "; set_color -d white; echo "Do not ask for confirmations"; set_color normal; set_color yellow; echo -n "    -v  "; set_color cyan; echo -n "--verbose "; set_color -d white; echo "Connect TTY to the output buffer"; set_color normal; set_color yellow; echo -n "    -h  "; set_color cyan; echo -n "--help "; set_color -d white; echo "Send this message"; set_color normal; set_color white; echo; echo -n "This installer only works for "; set_color yellow; echo -n "fish "; set_color white; echo -n "and "; set_color red; echo "ubuntu";	
+			case NVIM_NOT_INSTALLED
+        set_color yellow; echo -n "[mirzaev/nvim] "; set_color red; echo -n "[ERROR] "; set_color white; echo "NeoVim is not installed";
 			case PACKER_INSTALL
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[TASK] "; set_color white; echo "Install Packer? (\"wbthomason/packer.nvim\") (y/N) ";
 			case PACKER_EXISTS
@@ -107,7 +104,7 @@ else
 			case LSP_CSSMODULES_INSTALL
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[TASK] "; set_color white; echo "Install the LSP-server for CSS (formatter)? (\"antonk52/cssmodules-language-server\") (y/N) ";
 			case LSP_CSSMODULES_INSTALLED
-        set_color yellow; echo -n "[mirzaev/nvim] "; set_color green; echo -n "[WORK] "; set_color white; echo "Install the LSP-server for CSS (formatter) (\"antonk52/cssmodules-language-server\")";
+        set_color yellow; echo -n "[mirzaev/nvim] "; set_color green; echo -n "[WORK] "; set_color white; echo "Installed the LSP-server for CSS (formatter) (\"antonk52/cssmodules-language-server\")";
 			case LSP_DENO_INSTALL
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[TASK] "; set_color white; echo "Install the LSP-server for JavaScript and PostScript? (\"denoland/deno\") (y/N) ";
 			case LSP_DENO_INSTALLED
@@ -139,6 +136,49 @@ else
 		end
 	end
 end
+
+if set -q _flag_help
+	# Sending the message
+	print HELP
+
+	# Exit (success)
+	return 0
+end
+
+if not type -q nvim
+	# Sending the message
+	print NVIM_NOT_INSTALLED
+	echo $NVIM_WIKI_INSTALLATION
+
+	# Exit (fail)
+	return 1
+end
+
+if set -q _flag_update
+	begin
+		# Downloading and installing fnm (for NodeJS)
+		curl -o- https://fnm.vercel.app/install | bash
+
+		# Initializing fnm
+		source /home/mirzaev/.config/fish/conf.d/fnm.fish
+
+		# Downloadind and installing Node.js:
+		fnm install $NODEJS_VERSION
+
+		# need to rewrite in future (бляяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя)
+		sudo apt install -y npm python3-venv python3-pip rubygems ruby-dev pkg-config
+		python3 -m ~/.local/bin/pip install --upgrade pip
+		fish_add_path ~/.local/bin
+		~/.local/bin/pip install --upgrade pynvim
+		sudo gem install neovim
+
+		# Install NeoVim module for NPM
+		npm i -g neovim
+	end &> $output
+end
+
+# Initializing the virtual environment for Python packages
+python3 -m venv ~/.local --system-site-packages
 
 if not set -q _flag_force
 	# Installation request
@@ -289,7 +329,7 @@ if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
 		rm -rf lua-language-server
 		git clone https://github.com/LuaLS/lua-language-server 
 		cd lua-language-server
-		fish ./make.sh 
+		bash ./make.sh 
 		fish_add_path $HOME/lua-language-server/bin 
 	end &> $output
 
@@ -347,6 +387,7 @@ if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
 		wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip"
 		unzip -o FiraCode.zip
 		rm FiraCode.zip
+		sudo apt install fontconfig
 		fc-cache -f -v
 	end &> $output
 
