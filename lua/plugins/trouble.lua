@@ -46,3 +46,20 @@ require('trouble').setup({
 	},
 	use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
 })
+
+-- Initializing Telescope
+local telescope = require("telescope")
+local telescope_actions = require("telescope.actions")
+local telescope_open = require("trouble.sources.telescope").open
+
+-- Use this to add more results without clearing the trouble list
+local add_to_trouble = require("trouble.sources.telescope").add
+
+telescope.setup({
+  defaults = {
+    mappings = {
+      i = { ["<c-t>"] = telescope_open },
+      n = { ["<c-t>"] = telescope_open },
+    },
+  },
+})

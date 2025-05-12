@@ -62,6 +62,10 @@ if test (string match -ri "ru" "$LANG")
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[ЗАДАЧА] "; set_color white; echo "Установить форматировщик Prettier? (\"prettier/vim-prettier\") (y/N) ";
 			case FORMATTER_PRETTIER_INSTALLED
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color green; echo -n "[РАБОТА] "; set_color white; echo "Установлен форматировщик Prettier (\"prettier/vim-prettier\")";
+			case PHP_DEBUG_ADAPTER_INSTALL
+        set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[ЗАДАЧА] "; set_color white; echo "Установить адаптер для отладки PHP? (\"xdebug/vscode-php-debug\") (y/N) ";
+			case PHP_DEBUG_ADAPTER_INSTALLED
+        set_color yellow; echo -n "[mirzaev/nvim] "; set_color green; echo -n "[РАБОТА] "; set_color white; echo "Установлен адаптер для отладки PHP (\"xdebug/vscode-php-debug\")";
 			case FONT_INSTALL
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[ЗАДАЧА] "; set_color white; echo "Установить шрифт "(set_color cyan)"FiraCode"(set_color white)"? (y/N) ";
 			case FONT_INSTALLED
@@ -121,6 +125,10 @@ else
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[TASK] "; set_color white; echo "Install the formatter Prettier? (\"prettier/vim-prettier\") (y/N) ";
 			case FORMATTER_PRETTIER_INSTALLED
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color green; echo -n "[WORK] "; set_color white; echo "Installed the formatter Prettier (\"prettier/vim-prettier\")";
+			case PHP_DEBUG_ADAPTER_INSTALL
+        set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[TASK] "; set_color white; echo "Install the debug adapter for PHP? (\"xdebug/vscode-php-debug\") (y/N) ";
+			case PHP_DEBUG_ADAPTER_INSTALLED
+        set_color yellow; echo -n "[mirzaev/nvim] "; set_color green; echo -n "[WORK] "; set_color white; echo "Installed the debug-adapter for PHP (\"xdebug/vscode-php-debug\")";
 			case FONT_INSTALL
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[TASK] "; set_color white; echo "Install "(set_color cyan)"FiraCode"(set_color white)" font? (y/N) ";
 			case FONT_INSTALLED
@@ -368,6 +376,25 @@ if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
 	end &> $output
 
 	print FORMATTER_PRETTIER_INSTALLED
+end
+
+if not set -q _flag_force
+	# Installation request
+	set RESPONSE (read -n 1 -p "print PHP_DEBUG_ADAPTER_INSTALL")
+	bind -e y
+end
+
+if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
+	# Accepted installation of "xdebug/vscode-php-debug"
+
+	begin
+		cd ~/
+		git clone https://github.com/xdebug/vscode-php-debug.git
+		cd vscode-php-debug
+		npm install && npm run build
+	end &> $output
+
+	print PHP_DEBUG_ADAPTER_INSTALLED
 end
 
 print FONTS

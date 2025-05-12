@@ -1,12 +1,15 @@
--- Настройки
+-- Settings
 require('settings/system')
 require('settings/tabs')
 require('settings/panels')
 require('settings/search')
 
--- Плагины
+-- Plugins
 require('plugins/packer')
 
--- Комбинации клавиш
+-- Keymaps
 require('keymaps/system')
 require('keymaps/plugins')
+
+-- Autocommands
+require('autocommands')

@@ -25,7 +25,10 @@ vim.opt_local.wrap = true
 -- Отображение колонки курсора
 vim.opt_local.cursorcolumn = true
 
--- Выбор цветовой темы
+-- Theme
+vim.opt.background = "dark"
+
+-- Colorscheme
 -- vim.cmd.colorscheme('default')
 -- vim.cmd.colorscheme('koehler')
 vim.cmd.colorscheme('vim')

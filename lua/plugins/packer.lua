@@ -5,6 +5,12 @@ return require('packer').startup(function(use)
 	-- Менеджер плагинов Packer (автообновление)
 	use 'wbthomason/packer.nvim'
 
+	-- Flexoki colorscheme
+	use {
+		'nuvic/flexoki-nvim',
+		config = function() require('plugins/flexoki') end
+	}
+
 	-- Быстрая настройка LSP-серверов
 	use {
 		'neovim/nvim-lspconfig',
@@ -97,12 +103,6 @@ return require('packer').startup(function(use)
 	-- Цвета для отображения найденных ошибок LSP-сервером в случае если другие цвета не найдены
 	use 'folke/lsp-colors.nvim'
 
-	-- Клиентская реализация DAP
-	use {
-		'mfussenegger/nvim-dap',
-		config = function() require('plugins/dap') end
-	}
-
 	-- Автозавершение
 	use {
 		'ms-jpq/coq_nvim',
@@ -133,19 +133,28 @@ return require('packer').startup(function(use)
 		'vim-test/vim-test',
 		config = function() require('plugins/vim-test') end
 	}
+	-- Functions for Telescope
+	use 'nvim-lua/plenary.nvim'
 
-	-- Интерфейс для поиска
+	-- DAP integration for Telescope
+	use 'nvim-telescope/telescope-dap.nvim'
+
+	-- Fuzzy finder over lists (find, filter, preview, pick)
 	use {
 		'nvim-telescope/telescope.nvim',
-		-- tag = '0.1.1',
+		tag = '0.1.8',
+		requires = {'nvim-lua/plenary.nvim'},
 		config = function() require('plugins/telescope') end
 	}
 
-	-- Интеграция treesitter
+	-- UI for Treesitter
 	use {
 		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate',
-		config = function() require('plugins/treesitter') end
+		config = function() require('plugins/treesitter') end,
+		run = function()
+			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+			ts_update()
+    end
 	}
 
 	-- Удобное комментирование
@@ -180,9 +189,31 @@ return require('packer').startup(function(use)
 
 	-- Форматировщик Prettier
   use {
-      'prettier/vim-prettier',
-			branch = 'master',
-			-- run = 'sudo npm i -g',
-      run = 'yarn install --frozen-lockfile --production'
+    'prettier/vim-prettier',
+		branch = 'master',
+		-- run = 'sudo npm i -g',
+		run = 'yarn install --frozen-lockfile --production'
   }
+
+	-- Debug Adapter Protocol client implementation --
+	use {
+		'mfussenegger/nvim-dap',
+		config = function() require('plugins/dap') end
+	}
+
+	-- Asynchronous IO --
+	use 'nvim-neotest/nvim-nio'
+
+	-- UI for DAP client implementation --
+	use { 
+		'rcarriga/nvim-dap-ui', 
+		requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
+		config = function() require('plugins/dapui') end
+	}
+
+	-- Virtual text support for DAP client implementation and Treesitter --
+	use {
+		'theHamsta/nvim-dap-virtual-text',
+		config = function() require('plugins/dap-text') end
+	}
 end)
