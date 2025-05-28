@@ -150,7 +150,7 @@ if set -q _flag_help
 	print HELP
 
 	# Exit (success)
-	return 0
+	exit 0
 end
 
 if not type -q nvim
@@ -159,7 +159,7 @@ if not type -q nvim
 	echo $NVIM_WIKI_INSTALLATION
 
 	# Exit (fail)
-	return 1
+	exit 1
 end
 
 if set -q _flag_update
@@ -168,16 +168,15 @@ if set -q _flag_update
 		curl -o- https://fnm.vercel.app/install | bash
 
 		# Initializing fnm
-		source /home/mirzaev/.config/fish/conf.d/fnm.fish
+		source ~/.config/fish/conf.d/fnm.fish
 
 		# Downloadind and installing Node.js:
 		fnm install $NODEJS_VERSION
 
-		# need to rewrite in future (бляяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя)
+		# need to rewrite in the future (бляяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя)
 		sudo apt install -y npm python3-venv python3-pip rubygems ruby-dev pkg-config
-		python3 -m ~/.local/bin/pip install --upgrade pip
-		fish_add_path ~/.local/bin
-		~/.local/bin/pip install --upgrade pynvim
+		python3 -m pip install --upgrade pip
+		pip install --upgrade pynvim
 		sudo gem install neovim
 
 		# Install NeoVim module for NPM
