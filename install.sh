@@ -156,6 +156,7 @@ end
 if not type -q nvim
 	# Sending the message
 	print NVIM_NOT_INSTALLED
+	set_color blue
 	echo $NVIM_WIKI_INSTALLATION
 
 	# Exit (fail)
