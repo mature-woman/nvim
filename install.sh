@@ -171,6 +171,9 @@ if set -q _flag_update
 		# Initializing fnm
 		source ~/.config/fish/conf.d/fnm.fish
 
+		# Installing dependencies
+		sudo apt install -y curl zip
+
 		# Downloadind and installing Node.js:
 		fnm install $NODEJS_VERSION
 
