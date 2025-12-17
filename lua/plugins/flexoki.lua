@@ -1,9 +1,13 @@
--- Initializing
-local flexoki = require('flexoki')
-
--- Installing
-flexoki.setup({
- variant = "auto", -- auto, moon, or dawn
+-- Inky color scheme
+-- todo навести порядок
+return {
+	'nuvic/flexoki-nvim',
+	enabled = true,
+	lazy = false,
+	priority = 100,
+	name = 'flexoki',
+	opts = {
+		variant = 'auto', -- auto, moon, or dawn
     dim_inactive_windows = false,
     extend_background_behind_borders = true,
 
@@ -17,35 +21,35 @@ flexoki.setup({
     },
 
     groups = {
-        border = "muted",
-        link = "purple_two",
-        panel = "surface",
+        border = 'muted',
+        link = 'purple_two',
+        panel = 'surface',
 
-	error = "red_one",
-	hint = "purple_one",
-	info = "cyan_one",
-	ok = "green_one",
-	warn = "orange_one",
-	note = "blue_one",
-	todo = "magenta_one",
+	error = 'red_one',
+	hint = 'purple_one',
+	info = 'cyan_one',
+	ok = 'green_one',
+	warn = 'orange_one',
+	note = 'blue_one',
+	todo = 'magenta_one',
 
-	git_add = "green_one",
-	git_change = "yellow_one",
-	git_delete = "red_one",
-	git_dirty = "yellow_one",
-	git_ignore = "muted",
-	git_merge = "purple_one",
-	git_rename = "blue_one",
-	git_stage = "purple_one",
-	git_text = "magenta_one",
-	git_untracked = "subtle",
+	git_add = 'green_one',
+	git_change = 'yellow_one',
+	git_delete = 'red_one',
+	git_dirty = 'yellow_one',
+	git_ignore = 'muted',
+	git_merge = 'purple_one',
+	git_rename = 'blue_one',
+	git_stage = 'purple_one',
+	git_text = 'magenta_one',
+	git_untracked = 'subtle',
 
-        h1 = "purple_two",
-        h2 = "cyan_two",
-        h3 = "magenta_two",
-        h4 = "orange_two",
-        h5 = "blue_two",
-        h6 = "cyan_two",
+        h1 = 'purple_two',
+        h2 = 'cyan_two',
+        h3 = 'magenta_two',
+        h4 = 'orange_two',
+        h5 = 'blue_two',
+        h6 = 'cyan_two',
     },
 
     palette = {
@@ -57,8 +61,8 @@ flexoki.setup({
     },
 
     highlight_groups = {
-        -- Comment = { fg = "subtle" },
-        -- VertSplit = { fg = "muted", bg = "muted" },
+        -- Comment = { fg = 'subtle' },
+        -- VertSplit = { fg = 'muted', bg = 'muted' },
     },
 
     before_highlight = function(group, highlight, palette)
@@ -71,7 +75,10 @@ flexoki.setup({
         -- if highlight.fg == palette.blue_two then
         --     highlight.fg = palette.cyan_two
         -- end
-    end,})
-
--- Activating
-vim.cmd("colorscheme flexoki-moon")
+    end,
+	},
+	config = function()
+		-- Activating
+		vim.cmd('colorscheme flexoki')
+	end
+}

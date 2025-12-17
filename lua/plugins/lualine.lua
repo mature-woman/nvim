@@ -1,6 +1,23 @@
-require('lualine').setup {
-  options = {
-    icons_enabled = true,
+-- A blazing fast and easy to configure 
+-- neovim statusline plugin written in pure lua
+-- @todo навести порядок
+return {
+    'nvim-lualine/lualine.nvim',
+		enabled = true,
+		lazy = false,
+		priority = 80,
+    dependencies = { 
+			-- Provides Nerd Font icons (glyphs) for use by neovim plugins 
+			{ 'nvim-tree/nvim-web-devicons' },
+
+			-- LSP Progress lualine componenet 
+			{ 'arkav/lualine-lsp-progress' },
+
+			-- A Git wrapper so awesome, it should be illegal
+			{ 'tpope/vim-fugitive' }
+		},
+		opts = {
+			icons_enabled = true,
     theme = 'auto',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
@@ -11,17 +28,29 @@ require('lualine').setup {
     ignore_focus = {},
     always_divide_middle = true,
     always_show_tabline = true,
-    globalstatus = false,
+    globalstatus = true,
     refresh = {
-      statusline = 100,
-      tabline = 100,
-      winbar = 100,
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+      refresh_time = 16, -- ~60fps
+      events = {
+        'WinEnter',
+        'BufEnter',
+        'BufWritePost',
+        'SessionLoadPost',
+        'FileChangedShellPost',
+        'VimResized',
+        'Filetype',
+        'CursorMoved',
+        'CursorMovedI',
+        'ModeChanged',
+      },
     }
   },
   sections = {
     lualine_a = {
-      {
-        'mode',
+			'mode',
         icons_enabled = true,
         icon = nil,
         separator = nil,
@@ -31,12 +60,11 @@ require('lualine').setup {
         padding = 1,
         fmt = nil,
         on_click = nil,
-      }
-    },
+		},
     lualine_b = {
-      'branch', 
-      'diff', 
-      {
+			'branch', 
+			'diff', 
+			{
         'diagnostics',
         sources = { 'coc' },
         sections = { 'error', 'warn', 'info', 'hint' },
@@ -51,9 +79,10 @@ require('lualine').setup {
         update_in_insert = false,
         always_visible = false
       }
-    },
+		},
     lualine_c = {'filename', 'lsp_progress'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_x = { FugitiveStatusline, 'encoding', 'fileformat', 'filetype'},
+    -- lualine_x = { FugitiveHead, 'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
   },
@@ -68,5 +97,9 @@ require('lualine').setup {
   tabline = {},
   winbar = {},
   inactive_winbar = {},
-  extensions = {'nvim-dap-ui', 'trouble', 'neo-tree'}
+  extensions = {
+		'lazy',
+		'nvim-dap-ui', 
+		'trouble', 
+		'neo-tree'}
 }

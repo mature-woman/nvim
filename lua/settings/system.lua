@@ -1,3 +1,7 @@
+-- Leader button
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 -- Использовать системный буфер обмена
 vim.opt.clipboard = 'unnamedplus'
 
@@ -28,9 +32,7 @@ vim.opt_local.cursorcolumn = true
 -- Theme
 vim.opt.background = "dark"
 
--- Colorscheme
--- vim.cmd.colorscheme('default')
--- vim.cmd.colorscheme('koehler')
+-- Colorscheme @see plugin "flexoki"
 vim.cmd.colorscheme('vim')
 
 -- Добавление ru_RU (переключать через <c-^>)
@@ -48,3 +50,7 @@ vim.opt_local.spelllang = 'ru_yo,en_us'
 vim.g.markdown_fenced_languages = {
   "ts=typescript"
 }
+
+-- Syntax hightlighting
+vim.cmd('syntax on')
+vim.cmd('filetype plugin on')

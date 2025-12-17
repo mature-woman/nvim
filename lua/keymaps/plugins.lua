@@ -62,7 +62,7 @@ vim.keymap.set({ 'n', 'v', 't' }, 'F', function()
 		else
 			-- LSP-server clients not found
 
-			vim.api.nvim_exec('PrettierAsync', false)
+			-- vim.api.nvim_exec('PrettierAsync', false)
 		end
 	end,
 	{ noremap = true, silent = true, buffer = bufnr })

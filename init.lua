@@ -5,7 +5,7 @@ require('settings/panels')
 require('settings/search')
 
 -- Plugins
-require('plugins/packer')
+require("settings/lazy")
 
 -- Keymaps
 require('keymaps/system')

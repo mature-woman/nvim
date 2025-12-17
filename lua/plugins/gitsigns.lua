@@ -1,5 +1,11 @@
-require('gitsigns').setup {
-  on_attach = gitsigns_on_attach,
+-- Git integration for buffers
+-- todo навести порядок
+return {
+	'lewis6991/gitsigns.nvim',
+	enabled = true,
+	lazy = true,
+	opts = {
+		on_attach = gitsigns_on_attach,
   signs = {
     add          = { text = '│' },
     change       = { text = '│' },
@@ -40,4 +46,6 @@ require('gitsigns').setup {
   --[[ yadm = {
     enable = false
   }, ]]
+
+	}
 }

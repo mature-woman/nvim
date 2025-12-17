@@ -1,27 +1,27 @@
--- Initializing
-local telescope = require('telescope');
+-- Find, Filter, Preview, Pick. All lua, all the time
+-- Gaze deeply into unknown regions using the power of the moon
+return {
+	'nvim-telescope/telescope.nvim',
+	enabled = true,
+	lazy = true,
+	tag = 'v0.2.0',
+	dependencies = {
+		-- Functions for Telescope
+		{ 'nvim-lua/plenary.nvim' },
 
--- Installing
-telescope.setup {
-  pickers = {
-    -- Default configuration for builtin picikers goes here:
-    -- picker_name = {
-    --   picker_configi_key = value,
-    --   ...
-    -- }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
-  },
+		-- Integration for nvim-dap with telescope.nvim 
+		{ 'nvim-telescope/telescope-dap.nvim' }
+	},
+	opts = {
+		exteinsiions = {
+			dap = {}
+		}
+	},
+	config = function()
+		-- Initializing telescope
+		local telescope = require('telescope')
 
-  exteinsiions = {
-    -- Your extensioni configuration goes here:
-    -- extension_name = {
-    --   extension_config_key = value,
-    -- }
-    -- please take a look at the readme of the extension you want to configure
-		dap = {}
-  }
+		-- Loading extensions
+		telescope.load_extension('dap')
+	end
 }
-
--- Loading extensions
-telescope.load_extension('dap')
