@@ -2,8 +2,13 @@
 return {
 	'akinsho/bufferline.nvim', 
 	enabled = true,
-	lazy = false,
-	priority = 40,
+	lazy = true,
+	event = 'BufReadPre',
+	keys = {
+		{ '<tab>', '<cmd>BufferLineCycleNext<cr>', mode = { 'n' }, desc = 'Move to the next tab', noremap = true, silent = true },
+		{ '<s-tab>', '<cmd>BufferLineCyclePrev<cr>', mode = { 'n' }, desc = 'Move to the previous tab', noremap = true, silent = true },
+		{ '<leader><tab>', '<cmd>lua require("bufferline").go_to(vim.fn.input("Enter tab number: "), true)<cr>', mode = { 'n' }, desc = 'Move to the tab', noremap = true, silent = true },
+	},
 	version = '*', 
 	dependencies = {
 		--
@@ -12,7 +17,7 @@ return {
   opts = {
     options = {
 			themable = true,
-    numbers = 'buffer_id',
+    numbers = 'ordinal',
     -- close_command = 'bdelete! %d',
     -- right_mouse_command = 'bdelete! %d',
     -- left_mouse_command = 'buffer %d',
@@ -44,7 +49,7 @@ return {
     persist_buffer_sort = true,
     move_wraps_at_ends = false,
     -- separator_style = 'slant' | 'slope' | 'thick' | 'thin' | { 'any', 'any' },
-    separator_style = 'thin',
+    separator_style = 'default',
     enforce_regular_tabs = false,
     always_show_bufferline = true,
     auto_toggle_bufferline = true,

@@ -134,7 +134,9 @@ vim.lsp.config(
 vim.lsp.enable('jsonls')
 
 -- Инициализация 'luals/lua-language-server' (LSP-сервер для Lua)
---[[ vim.lsp.config.lua_ls.setup({
+ vim.lsp.config(
+	 'lua_ls',
+	 {
   settings = {
     Lua = {
       runtime = {
@@ -158,6 +160,8 @@ vim.lsp.enable('jsonls')
   on_attach = lspconfig_on_attach,
   coq.lsp_ensure_capabilities(),
   capabilities = capabilities 
-})]]
+}
+)
+vim.lsp.enable('lua_ls')
   end,
 }

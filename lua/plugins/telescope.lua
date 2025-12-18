@@ -4,7 +4,12 @@ return {
 	'nvim-telescope/telescope.nvim',
 	enabled = true,
 	lazy = true,
-	tag = 'v0.2.0',
+	keys = {
+		{ '<c-f>', '<cmd>Telescope find_files', mode = { 'n', 'i', 'v', 't' }, desc = 'Telescope find', noremap = true, silent = true },
+		{ '<c-F>', '<cmd>Telescope live_grep', mode = { 'n', 'i', 'v', 't' }, desc = 'Telescope grep', noremap = true, silent = true },
+		{ '<leader><s-tab>', '<cmd>Telescope buffers', mode = { 'n', 'i', 'v', 't' }, desc = 'Telescope buffers', noremap = true, silent = true },
+		{ '<leader>?', '<cmd>Telescope help_tags', mode = { 'n', 'i', 'v', 't' }, desc = 'Telescope help', noremap = true, silent = true },
+	},
 	dependencies = {
 		-- Functions for Telescope
 		{ 'nvim-lua/plenary.nvim' },
@@ -13,7 +18,7 @@ return {
 		{ 'nvim-telescope/telescope-dap.nvim' }
 	},
 	opts = {
-		exteinsiions = {
+		exteinsions = {
 			dap = {}
 		}
 	},

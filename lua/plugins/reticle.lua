@@ -4,7 +4,5 @@ return {
   'tummetott/reticle.nvim',
 	enabled = true,
 	lazy = true,
-  event = 'VeryLazy',
-  opts = {
-  },
+  event = 'VeryLazy'
 }

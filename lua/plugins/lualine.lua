@@ -61,25 +61,7 @@ return {
         fmt = nil,
         on_click = nil,
 		},
-    lualine_b = {
-			'branch', 
-			'diff', 
-			{
-        'diagnostics',
-        sources = { 'coc' },
-        sections = { 'error', 'warn', 'info', 'hint' },
-        diagnostics_color = {
-          error = 'DiagnosticError',
-          warn  = 'DiagnosticWarn',
-          info  = 'DiagnosticInfo',
-          hint  = 'DiagnosticHint',
-        },
-        symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
-        colored = true,
-        update_in_insert = false,
-        always_visible = false
-      }
-		},
+    lualine_b = {'branch', 'diff'},
     lualine_c = {'filename', 'lsp_progress'},
     lualine_x = { FugitiveStatusline, 'encoding', 'fileformat', 'filetype'},
     -- lualine_x = { FugitiveHead, 'encoding', 'fileformat', 'filetype'},
@@ -101,5 +83,23 @@ return {
 		'lazy',
 		'nvim-dap-ui', 
 		'trouble', 
-		'neo-tree'}
+		'neo-tree'
+	},
+ -- config = function()
+ -- 	local trouble = require("trouble")
+ -- 	local symbols = trouble.statusline({
+ --      mode = "lsp_document_symbols",
+ --      groups = {},
+ --      title = false,
+ --      filter = { range = true },
+ --      format = "{kind_icon}{symbol.name:Normal}",
+ --      -- The following line is needed to fix the background color
+ --      -- Set it to the lualine section you want to use
+ --      hl_group = "lualine_c_normal",
+ --    })
+ --    table.insert(opts.sections.lualine_c, {
+ --      symbols.get,
+ --      cond = symbols.has,
+ --    })
+ -- end
 }

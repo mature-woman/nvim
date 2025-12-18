@@ -24,12 +24,6 @@ if test (string match -ri "ru" "$LANG")
 				set_color -b red yellow; echo -n "[mirzaev/nvim] "; set_color brcyan; echo -n "[ИНФОРМАЦИЯ] "; set_color -o white; echo "Формат: install.sh [флаги]"; echo; set_color normal; set_color yellow; echo -n "    -u  "; set_color cyan; echo -n "--update "; set_color -d white; echo "Обновить все зависимости"; set_color normal; set_color yellow; echo -n "    -f  "; set_color cyan; echo -n "--force "; set_color -d white; echo "Не просить подтверждения"; set_color normal; set_color yellow; echo -n "    -v  "; set_color cyan; echo -n "--verbose "; set_color -d white; echo "Подключить TTY к буферу вывода"; set_color normal; set_color yellow; echo -n "    -h  "; set_color cyan; echo -n "--help "; set_color -d white; echo "Прислать это сообщение"; echo; set_color normal; set_color white; echo -n "Этот установщик работает только для "; set_color yellow; echo -n "fish "; set_color white; echo -n "и "; set_color red; echo -n "ubuntu";	
 			case NVIM_NOT_INSTALLED
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color red; echo -n "[ОШИБКА] "; set_color white; echo "NeoVim не установлен";			
-			case PACKER_INSTALL
-        set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[ЗАДАЧА] "; set_color white; echo "Установить Packer? (\"wbthomason/packer.nvim\") (y/N) ";
-			case PACKER_EXISTS
-        set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[ЗАДАЧА] "; set_color white; echo "Packer уже установлен. Переустановить? (y/N) ";
-      case PACKER_INSTALLED
-        set_color yellow; echo -n "[mirzaev/nvim] "; set_color green; echo -n "[РАБОТА] "; set_color white; echo "Установлен Packer";
 			case LSP_INTELEPHENSE_INSTALL
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[ЗАДАЧА] "; set_color white; echo "Установить LSP-сервер для PHP? (\"bmewburn/vscode-intelephense\") (y/N) ";
 			case LSP_INTELEPHENSE_INSTALLED
@@ -87,12 +81,6 @@ else
 				set_color yellow; echo -n "[mirzaev/nvim] "; set_color brcyan; echo -n "[INFORMATION] "; set_color -o white; echo "Format: install.sh [flags]"; echo; set_color normal; set_color yellow; echo -n "    -u  "; set_color cyan; echo -n "--update "; set_color -d white; echo "Update all dependencies"; set_color normal; set_color yellow; echo -n "    -f  "; set_color cyan; echo -n "--force "; set_color -d white; echo "Do not ask for confirmations"; set_color normal; set_color yellow; echo -n "    -v  "; set_color cyan; echo -n "--verbose "; set_color -d white; echo "Connect TTY to the output buffer"; set_color normal; set_color yellow; echo -n "    -h  "; set_color cyan; echo -n "--help "; set_color -d white; echo "Send this message"; set_color normal; set_color white; echo; echo -n "This installer only works with "; set_color yellow; echo -n "fish "; set_color white; echo -n "and "; set_color red; echo "ubuntu";	
 			case NVIM_NOT_INSTALLED
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color red; echo -n "[ERROR] "; set_color white; echo "NeoVim is not installed";
-			case PACKER_INSTALL
-        set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[TASK] "; set_color white; echo "Install Packer? (\"wbthomason/packer.nvim\") (y/N) ";
-			case PACKER_EXISTS
-        set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[TASK] "; set_color white; echo "Packer already installed. Reinstall? (y/N) ";
-      case PACKER_INSTALLED
-        set_color yellow; echo -n "[mirzaev/nvim] "; set_color green; echo -n "[WORK] "; set_color white; echo "Installed Packer";
 			case LSP_INTELEPHENSE_INSTALL
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[TASK] "; set_color white; echo "Install the LSP-server for PHP? (\"bmewburn/vscode-intelephense\") (y/N) ";
 			case LSP_INTELEPHENSE_INSTALLED
@@ -178,7 +166,7 @@ if set -q _flag_update
 		fnm install $NODEJS_VERSION
 
 		# need to rewrite in the future (бляяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя)
-		sudo apt install -y npm python3-venv python3-pip rubygems ruby-dev pkg-config
+		sudo apt install -y npm python3-venv python3-pip rubygems ruby-dev pkg-config lua5.4 luarocks
 		python3 -m pip install --upgrade pip
 		pip install --upgrade pynvim
 		sudo gem install neovim
@@ -190,49 +178,6 @@ end
 
 # Initializing the virtual environment for Python packages
 python3 -m venv ~/.local --system-site-packages
-
-if not set -q _flag_force
-	# Installation request
-	set RESPONSE (read -n 1 -p "print PACKER_INSTALL")
-	bind -e y
-end
-
-if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
-	if test -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-		# Найден репозиторий "wbthomason/packer.nvim"
-
-		if not set -q _flag_force
-			# Installation request
-			set RESPONSE (read -n 1 -p "print PACKER_EXISTS")
-			bind -e y
-		end
-
-		if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
-			# Запрошена переустановка
-
-			begin 
-				# Деинициализация старого репозитория
-				rm -rf ~/.local/share/nvim/site/pack/packer/start/packer.nvim 
-
-				# Инициализация репозитория
-				git clone --depth 1 https://github.com/wbthomason/packer.nvim\
-					~/.local/share/nvim/site/pack/packer/start/packer.nvim 
-			end &> $output
-
-			print PACKER_INSTALLED
-		end
-	else 
-		# Не найден репозиторий "wbthomason/packer.nvim" 
-
-		begin
-			# Инициализация репозитория
-			git clone --depth 1 https://github.com/wbthomason/packer.nvim\
-				~/.local/share/nvim/site/pack/packer/start/packer.nvim 
-		end &> $output
-
-		print PACKER_INSTALLED
-	end
-end
 
 if not set -q _flag_force
 	# Installation request

@@ -1,6 +1,6 @@
 -- Leader button
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 
 -- Использовать системный буфер обмена
 vim.opt.clipboard = 'unnamedplus'

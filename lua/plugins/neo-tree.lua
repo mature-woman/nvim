@@ -3,8 +3,10 @@
 return {
 	'nvim-neo-tree/neo-tree.nvim',
 	enabled = true,
-	lazy = false,
-	priority = 60,
+	lazy = true,
+	keys = {
+		{ '<f1>', '<cmd>Neotree toggle<cr>', mode = { 'n', 'i', 'v', 't' }, desc = 'NeoTree toggle', noremap = true, silent = true },
+	},
   branch = 'v3.x', 
   dependencies = {
     -- Lua functions
