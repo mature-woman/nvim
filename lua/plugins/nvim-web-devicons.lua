@@ -5,7 +5,6 @@ return {
 	lazy = false,
 	priority = 110,
 	opts = {
-		override = {},
 		color_icons = true,
 		default = true,
 		strict = true

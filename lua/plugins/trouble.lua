@@ -4,11 +4,16 @@
 return { 
   'folke/trouble.nvim',
 	enabled = true,
-	lazy = true,
+	lazy = false,
 	cmd = 'Trouble',
 	keys = {
 		{ '<f3>', '<cmd>Trouble diagnostics toggle<cr>', mode = { 'n', 'i', 'v', 't' }, desc = 'Diagnostics (Trouble)', noremap = true, silent = true },
 	},
-  opts = {},
-	config = function() end
+	dependencies = {
+		-- Nvim Treesitter configurations and abstraction layer 
+		{ 'nvim-treesitter/nvim-treesitter' },
+    
+    -- Provides Nerd Font icons (glyphs) for use by neovim plugins
+		{ 'nvim-tree/nvim-web-devicons' }
+	}
 }

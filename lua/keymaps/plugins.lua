@@ -6,7 +6,7 @@ vim.keymap.set({ 'n', 'v', 't' }, 'F', function()
 			vim.api.nvim_exec('w', false)
 			vim.api.nvim_exec('! nginxbeautifier -i %', false)
 			vim.api.nvim_exec('redraw', false)
-		elseif (not (vim.diff(vim.inspect(vim.lsp.buf_get_clients()), '{}') == '')) then
+		elseif (not (vim.diff(vim.inspect(vim.lsp.get_clients()), '{}') == '')) then
 			-- LSP-server clients is ready
 
 			vim.lsp.buf.format { async = true }

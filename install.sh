@@ -173,8 +173,43 @@ if set -q _flag_update
 
 		# Install NeoVim module for NPM
 		npm i -g neovim
+		npm i -g tree-sitter-cli 
+		npm i -g yarn
 	end &> $output
 end
+
+sudo apt install -y build-essential flex bison libisl-dev texinfo texlive
+
+# mkdir ~/src
+
+# cd ~/src
+# wget https://ftp.gnu.org/gnu/binutils/binutils-2.45.1.tar.xz
+# tar -xf binutils-2.45.1.tar.xz
+# cd binutils-2.45.1
+# mkdir build
+# cd build
+# ../configure --prefix=/usr/local --target=x86_64-elf --program-prefix=x86_64-elf-
+# make all
+# sudo make install
+
+# cd ~/src
+# wget http://ftp.gnu.org/gnu/gcc/gcc-14.1.0/gcc-14.1.0.tar.gz
+# tar -xf gcc-14.1.0.tar.gz
+# cd gcc-14.1.0
+# mkdir build
+# cd build
+# ../configure -v --build=$(uname -m)-linux-gnu --host=$(uname -m)-linux-gnu --target=$(uname -m)-linux-gnu --prefix=/usr/local/gcc-14.1.0 --enable-checking=release --enable-languages=c,c++ --disable-multilib --program-suffix=-14.1.0
+# make
+# sudo make install
+# sudo update-alternatives --install /usr/bin/g++ g++ /usr/local/gcc-14.1.0/bin/g++-14.1.0 14
+# sudo update-alternatives --install /usr/bin/gcc gcc /usr/local/gcc-14.1.0/bin/gcc-14.1.0 14
+
+# # git clone git://sourceware.org/git/glibc.git
+# git clone https://github.com/bminor/glibc
+# cd glibc
+# mkdir build
+# cd build
+# ../configure --disable-sanity-checks
 
 # Initializing the virtual environment for Python packages
 python3 -m venv ~/.local --system-site-packages

@@ -1,6 +1,8 @@
 -- Offset
-vim.keymap.set({'i', 'v', 't'}, '<tab>', '>', {noremap = true, silent = true})
-vim.keymap.set({'i', 'v', 't'}, '<s-tab>', '<', {noremap = true, silent = true})
+vim.keymap.set({'i'}, '<tab>', '<cmd>><cr>', {noremap = true, silent = true})
+vim.keymap.set({'i'}, '<s-tab>', '<cmd><<cr>', {noremap = true, silent = true})
+vim.keymap.set({'v', 't'}, '<tab>', '>', {noremap = true, silent = true})
+vim.keymap.set({'v', 't'}, '<s-tab>', '<', {noremap = true, silent = true})
 
 -- Disabling arrows
 vim.keymap.set({'n', 'i', 'v', 't'}, '<left>', '', {noremap = true, silent = true})
