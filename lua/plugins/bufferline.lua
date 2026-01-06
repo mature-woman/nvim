@@ -7,7 +7,7 @@ return {
 	keys = {
 		{ '<tab>', '<cmd>BufferLineCycleNext<cr>', mode = { 'n' }, desc = 'Move to the next tab', noremap = true, silent = true },
 		{ '<s-tab>', '<cmd>BufferLineCyclePrev<cr>', mode = { 'n' }, desc = 'Move to the previous tab', noremap = true, silent = true },
-		{ '<leader><tab>', '<cmd>lua require("bufferline").go_to(vim.fn.input("Enter tab number: "), true)<cr>', mode = { 'n' }, desc = 'Move to the tab', noremap = true, silent = true },
+		{ '<c-tab>', '<cmd>lua require("bufferline").go_to(vim.fn.input("Enter tab number: "), true)<cr>', mode = { 'n' }, desc = 'Move to the tab', noremap = true, silent = true },
 	},
 	version = '*', 
 	dependencies = {

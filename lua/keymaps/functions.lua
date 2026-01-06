@@ -1,2 +1,2 @@
 -- Quick compilation with GCC and running
-vim.keymap.set('n', 'co', '<cmd>:!gcc -o test % && ./test', {noremap = true})
+vim.keymap.set('n', '<leader>c', '<cmd>!gcc -o test % && ./test<cr>', { noremap = true })

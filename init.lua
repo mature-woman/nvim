@@ -9,6 +9,7 @@ require("settings/lazy")
 
 -- Keymaps
 require('keymaps/system')
+require('keymaps/functions')
 require('keymaps/plugins')
 
 -- Autocommands

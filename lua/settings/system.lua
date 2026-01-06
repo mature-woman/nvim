@@ -1,5 +1,5 @@
 -- Leader button
-vim.g.mapleader = ' '
+vim.g.mapleader = '`'
 vim.g.maplocalleader = '\\'
 
 -- Использовать системный буфер обмена
