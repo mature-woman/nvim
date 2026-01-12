@@ -166,7 +166,7 @@ if set -q _flag_update
 		fnm install $NODEJS_VERSION
 
 		# need to rewrite in the future (бляяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя)
-		sudo apt install -y npm universal-ctags python3-venv python3-pip rubygems ruby-dev pkg-config lua5.4 luarocks
+		sudo apt install -y npm universal-ctags python3-venv python3-pip rubygems ruby-dev pkg-config lua5.4 luarocks ripgrep
 		python3 -m pip install --upgrade pip
 		pip install --upgrade pynvim
 		sudo gem install neovim
