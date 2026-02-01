@@ -386,6 +386,19 @@ if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
 		npm install && npm run build
 	end &> $output
 
+	echo \nEdit your PHP config!\n\
+\n\
+/etc/php/8.5/fpm/conf.d/20-xdebug.ini\n\
+\n\
+zend_extension=xdebug.so\n\
+\n\
+xdebug.start_with_request = yes\n\
+xdebug.mode = debug,develop\n\
+xdebug.remote_handler = dbgp\n\
+xdebug.client_host = 127.0.0.1\n\
+xdebug.log = /tmp/xdebug_remote.log\n\
+xdebug.client_port = 9003\n;
+
 	print PHP_DEBUG_ADAPTER_INSTALLED
 end
 
