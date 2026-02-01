@@ -1,8 +1,8 @@
 -- Performant, batteries-included completion plugin for Neovim
 return {
 	'saghen/blink.cmp',
-	enabled = true,
-	lazy = false,
+	enabled = false,
+	lazy = true,
 	-- optional: provides snippets for the snippet source
 	dependencies = { 'rafamadriz/friendly-snippets' },
 

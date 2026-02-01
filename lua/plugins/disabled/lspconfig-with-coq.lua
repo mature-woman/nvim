@@ -1,7 +1,7 @@
 -- Quickstart configs for Nvim LSP
 return {
 	'neovim/nvim-lspconfig',
-	enabled = true,
+	enabled = false,
 	lazy = false,
 	priority = 70,
 	dependencies = {
