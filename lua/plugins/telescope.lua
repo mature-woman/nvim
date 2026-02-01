@@ -5,16 +5,16 @@ return {
 	enabled = true,
 	lazy = true,
 	keys = {
-		{ '<c-f>', '<cmd>Telescope find_files<cr>', mode = { 'n', 'i', 'v', 't' }, desc = 'Search files', noremap = true, silent = true },
-		{ '<c-g>', '<cmd>Telescope live_grep<cr>', mode = { 'n', 'i', 'v', 't' }, desc = 'Grep files', noremap = true, silent = true },
-		{ '<leader><tab>', '<cmd>Telescope buffers<cr>', mode = { 'n', 'v', 't' }, desc = 'Search buffers', noremap = true, silent = true },
-		{ '<leader>?', '<cmd>Telescope help_tags<cr>', mode = { 'n', 'v', 't' }, desc = 'Help', noremap = true, silent = true },
+		{ '<c-f>',         '<cmd>Telescope find_files<cr>', mode = { 'n', 'i', 'v', 't' }, desc = 'Search files',   noremap = true, silent = true },
+		{ '<c-g>',         '<cmd>Telescope live_grep<cr>',  mode = { 'n', 'i', 'v', 't' }, desc = 'Grep files',     noremap = true, silent = true },
+		{ '<leader><tab>', '<cmd>Telescope buffers<cr>',    mode = { 'n', 'v', 't' },      desc = 'Search buffers', noremap = true, silent = true },
+		{ '<leader>?',     '<cmd>Telescope help_tags<cr>',  mode = { 'n', 'v', 't' },      desc = 'Help',           noremap = true, silent = true },
 	},
 	dependencies = {
 		-- Functions for Telescope
 		{ 'nvim-lua/plenary.nvim' },
 
-		-- Integration for nvim-dap with telescope.nvim 
+		-- Integration for nvim-dap with telescope.nvim
 		{ 'nvim-telescope/telescope-dap.nvim' }
 	},
 	opts = {

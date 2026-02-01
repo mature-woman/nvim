@@ -33,9 +33,9 @@ if test (string match -ri "ru" "$LANG")
 			case LSP_VSCODE-LANGSERVERS_INSTALLED
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color green; echo -n "[РАБОТА] "; set_color white; echo "Установлены LSP-сервера от VSCode (JSON, HTML, CSS) (\"hrsh7th/vscode-langservers-extracted\")";
 			case LSP_EMMET_INSTALL
-        set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[ЗАДАЧА] "; set_color white; echo "Установить LSP-сервер для набора инструментов Emmet (HTML из CSS)? (\"aca/emmet-ls\") (y/N) ";
+        set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[ЗАДАЧА] "; set_color white; echo "Установить LSP-сервер для набора инструментов Emmet (HTML и CSS)? (\"aca/emmet-ls\") (y/N) ";
 			case LSP_EMMET_INSTALLED
-        set_color yellow; echo -n "[mirzaev/nvim] "; set_color green; echo -n "[РАБОТА] "; set_color white; echo "Установлен LSP-сервер для набора инструментов Emmet (HTML из CSS) (\"aca/emmet-ls\")";
+        set_color yellow; echo -n "[mirzaev/nvim] "; set_color green; echo -n "[РАБОТА] "; set_color white; echo "Установлен LSP-сервер для набора инструментов Emmet (HTML и CSS) (\"aca/emmet-ls\")";
 			case LSP_CSSMODULES_INSTALL
         set_color yellow; echo -n "[mirzaev/nvim] "; set_color blue; echo -n "[ЗАДАЧА] "; set_color white; echo "Установить LSP-сервер для CSS (форматировщик)? (\"antonk52/cssmodules-language-server\") (y/N) ";
 			case LSP_CSSMODULES_INSTALLED
@@ -166,9 +166,17 @@ if set -q _flag_update
 		fnm install $NODEJS_VERSION
 
 		# need to rewrite in the future (бляяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя)
-		sudo apt install -y npm universal-ctags python3-venv python3-pip rubygems ruby-dev pkg-config lua5.4 luarocks ripgrep
-		python3 -m pip install --upgrade pip
+		sudo apt install -y npm universal-ctags python3-venv python3-virtualenv python3-pip  rubygems ruby-dev pkg-config lua5.4 luarocks ripgrep
+
+		python3 -m virtualenv ~/.config/nvim/python
+		source ~/.config/nvim/python/bin/activate.fish
+
+	  # ~/.config/nvim/python/bin/python3 -m pip install --upgrade pip
+		# ~/.config/nvim/python/bin/pip install --upgrade pynvim
+
+	  python3 -m pip install --upgrade pip
 		pip install --upgrade pynvim
+
 		sudo gem install neovim
 
 		# Install NeoVim module for NPM
@@ -212,7 +220,7 @@ sudo apt install -y build-essential flex bison libisl-dev texinfo texlive
 # ../configure --disable-sanity-checks
 
 # Initializing the virtual environment for Python packages
-python3 -m venv ~/.local --system-site-packages
+~/.config/nvim/python/bin/python3 -m venv ~/.local --system-site-packages
 
 if not set -q _flag_force
 	# Installation request
@@ -374,6 +382,7 @@ if set -q _flag_force; or test (string match -ri 'y' "$RESPONSE")
 		cd ~/
 		git clone https://github.com/xdebug/vscode-php-debug.git
 		cd vscode-php-debug
+		git pull
 		npm install && npm run build
 	end &> $output
 

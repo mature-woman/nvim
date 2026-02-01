@@ -10,19 +10,30 @@ return {
 		-- yet support the Neovim 0.5 builtin LSP client
 		{ 'folke/lsp-colors.nvim' },
 
-		-- A completion plugin for neovim coded in Lua.
-		{ 'hrsh7th/nvim-cmp' },
+		-- Fast as FUCK nvim completion
+		{ 'ms-jpq/coq_nvim',       branch = 'coq' },
 
-		-- 💫 Extensible UI for Neovim notifications and LSP progress messages
-		{ 'j-hui/fidget.nvim' }
+		-- 9000+ Snippets
+		{ 'ms-jpq/coq.artifacts',  branch = 'artifacts' },
+
+		-- Lua & third party sources. Need to **configure separately**
+		{ 'ms-jpq/coq.thirdparty', branch = '3p' }
 	},
 	init = function()
+		vim.g.coq_settings = {
+			auto_start = 'shut-up'
+		}
 	end,
 	config = function()
 		-- @todo навести порядок
 
 		-- Активация вещания готовых набросков
-		local capabilities = require('cmp_nvim_lsp').default_capabilities()
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+		-- Инициализация 'ms-jpq/coq_nvim'
+		local coq = require('coq')
+
 		-- Инициализация LSP-серверов
 
 		-- Инициализация 'bmewburn/vscode-intelephense' (LSP-сервер для PHP)
@@ -30,6 +41,7 @@ return {
 			'intelephense',
 			{
 				on_attach = lspconfig_on_attach,
+				coq.lsp_ensure_capabilities(),
 				capabilities = capabilities
 			}
 		)
@@ -48,6 +60,7 @@ return {
 					provideFormatter = true,
 				},
 				on_attach = lspconfig_on_attach,
+				coq.lsp_ensure_capabilities(),
 				capabilities = capabilities
 			}
 		)
@@ -65,6 +78,7 @@ return {
 					},
 				},
 				on_attach = lspconfig_on_attach,
+				coq.lsp_ensure_capabilities(),
 				capabilities = capabilities
 			})
 		vim.lsp.enable('emmet_ls')
@@ -85,6 +99,7 @@ return {
 					}
 				},
 				on_attach = lspconfig_on_attach,
+				coq.lsp_ensure_capabilities(),
 				capabilities = capabilities
 			})
 		vim.lsp.enable('cssls')
@@ -97,6 +112,7 @@ return {
 					camelCase = false,
 				},
 				on_attach = lspconfig_on_attach,
+				coq.lsp_ensure_capabilities(),
 				capabilities = capabilities
 			})
 		vim.lsp.enable('cssmodules_ls')
@@ -110,6 +126,7 @@ return {
 					unstable = false
 				},
 				on_attach = lspconfig_on_attach,
+				coq.lsp_ensure_capabilities(),
 				capabilities = capabilities
 			})
 		vim.lsp.enable('denols')
@@ -119,6 +136,7 @@ return {
 			'jsonls',
 			{
 				on_attach = lspconfig_on_attach,
+				coq.lsp_ensure_capabilities(),
 				capabilities = capabilities
 			})
 		vim.lsp.enable('jsonls')
@@ -148,6 +166,7 @@ return {
 					},
 				},
 				on_attach = lspconfig_on_attach,
+				coq.lsp_ensure_capabilities(),
 				capabilities = capabilities
 			}
 		)

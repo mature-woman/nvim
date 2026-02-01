@@ -1,5 +1,5 @@
--- An asynchronous linter plugin for Neovim complementary 
--- to the built-in Language Server Protocol support. 
+-- An asynchronous linter plugin for Neovim complementary
+-- to the built-in Language Server Protocol support.
 return {
 	'mfussenegger/nvim-lint',
 	enabled = true,

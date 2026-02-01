@@ -1,14 +1,14 @@
--- A UI for nvim-dap
-return { 
-	'rcarriga/nvim-dap-ui', 
+-- An UI for nvim-dap
+return {
+	'rcarriga/nvim-dap-ui',
 	enabled = true,
 	lazy = true,
 	dependencies = {
-		-- Debug Adapter Protocol client implementation for Neovim 
-		'mfussenegger/nvim-dap', 
+		-- Debug Adapter Protocol client implementation for Neovim
+		{ 'mfussenegger/nvim-dap' },
 
 		-- A library for asynchronous IO in Neovim
-		'nvim-neotest/nvim-nio'
+		{ 'nvim-neotest/nvim-nio' }
 	},
 	config = function()
 		local dap, dapui = require('dap'), require('dapui')

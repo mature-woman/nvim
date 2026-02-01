@@ -4,7 +4,7 @@ return {
 	enabled = true,
 	lazy = false,
 	priority = 40,
-  build = ':TSUpdate',
+	build = ':TSUpdate',
 	opts = {
 		highlight = {
 			enable = true,

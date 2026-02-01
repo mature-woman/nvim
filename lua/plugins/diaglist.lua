@@ -1,4 +1,4 @@
--- Live render workspace diagnostics in quickfix with 
+-- Live render workspace diagnostics in quickfix with
 -- current buf errors on top, buffer diagnostics in loclist
 -- @todo удалить и заменить на трабл
 return {

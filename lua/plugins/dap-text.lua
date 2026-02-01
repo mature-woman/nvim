@@ -4,10 +4,10 @@ return {
 	enabled = true,
 	lazy = true,
 	dependencies = {
-		-- Debug Adapter Protocol client implementation for Neovim 
+		-- Debug Adapter Protocol client implementation for Neovim
 		{ 'mfussenegger/nvim-dap' },
 
-		-- Nvim Treesitter configurations and abstraction layer 
+		-- Nvim Treesitter configurations and abstraction layer
 		{ 'nvim-treesitter/nvim-treesitter' }
 	}
 }

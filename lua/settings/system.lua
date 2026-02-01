@@ -48,7 +48,7 @@ vim.opt_local.spelllang = 'ru_yo,en_us'
 
 -- Псевдонимы для языков
 vim.g.markdown_fenced_languages = {
-  "ts=typescript"
+	"ts=typescript"
 }
 
 -- Syntax hightlighting
